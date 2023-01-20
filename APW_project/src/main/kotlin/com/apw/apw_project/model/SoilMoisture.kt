@@ -6,10 +6,10 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-data class EnviromentSensor (
+data class SoilMoisture (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long = 0,
-        var temperature: Float,
         var humidity: Float,
+        var timestamp: Long
 )

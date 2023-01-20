@@ -1,7 +1,7 @@
 package com.apw.apw_project.controller
 
-import com.apw.apw_project.model.WaterSensor
-import com.apw.apw_project.repository.WaterRepository
+import com.apw.apw_project.model.SoilMoisture
+import com.apw.apw_project.repository.SoilMoistureRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.GetMapping
@@ -11,20 +11,19 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @CrossOrigin(origins = ["*"])
-@RequestMapping(value = ["/water"])
-class WaterController {
-
+@RequestMapping(value = ["/soilMoisture"])
+class SoilMoistureController {
     @Autowired
-    private lateinit var repository: WaterRepository
+    private lateinit var repository: SoilMoistureRepository
 
     @GetMapping("/add")
-    fun addData(@RequestParam distance: Float): WaterSensor {
-        println("Nowy rekord pojemności wody: $distance")
+    fun addData(@RequestParam humidity: Float): SoilMoisture {
+        println("Nowy rekord wilgotności gleby: $humidity")
         val timestamp = System.currentTimeMillis() / 1000
-        val data = WaterSensor(distance = distance, timestamp = timestamp)
+        val data = SoilMoisture(humidity = humidity, timestamp = timestamp)
         return repository.save(data)
     }
 
     @GetMapping
-    fun getData(): List<WaterSensor> = repository.findAll()
+    fun getData(): List<SoilMoisture> = repository.findAll()
 }
